@@ -4,6 +4,8 @@ const app = express();
 const {adminAuth} = require("./middleware/Auth")
 const connectedDB = require("./config/database");
 
+
+//DB Connection
 connectedDB().then(() => {
     console.log("Database successfully connected"); //first estiblished the database then start the server
     app.listen(4000, () => {
@@ -13,6 +15,8 @@ connectedDB().then(() => {
     console.log("Database is not connected")
 })
 
+
+//Middleware exapmple
 app.use("/", (req, res, next )=> {
     console.log("/ router")
     next()
