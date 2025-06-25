@@ -22,9 +22,22 @@ app.get("/user", async (req, res) => {
     const userEmail = req.body.emailId //get email id from browser/postman
     try{
         const users = await User.find({emailId: userEmail})
-        if(users.length){
+        if(users.length > 0){
             res.send(users)
+        } else {
+            res.status(404).send("User not found")
         }
+    } catch(err){
+        res.status(400).send("Something went wrong");
+    }
+})
+
+//get all the users
+app.get("/feed", async (req, res)=>{
+    
+    try{
+        const users = await User.find({});
+        res.send(users)
     } catch(err){
         res.status(400).send("Something went wrong");
     }
