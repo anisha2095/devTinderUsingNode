@@ -17,6 +17,19 @@ app.post("/signup", async (req, res) => {
     }
 })
 
+//Get user by emailid
+app.get("/user", async (req, res) => {
+    const userEmail = req.body.emailId //get email id from browser/postman
+    try{
+        const users = await User.find({emailId: userEmail})
+        if(users.length){
+            res.send(users)
+        }
+    } catch(err){
+        res.status(400).send("Something went wrong");
+    }
+})
+
 //DB Connection
 connectedDB().then(() => {
     console.log("Database successfully connected"); //first estiblished the database then start the server
