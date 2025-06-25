@@ -3,13 +3,11 @@ const connectedDB = require("./config/database");
 const app = express();
 const User = require("./models/user")
 
+app.use(express.json());
 app.post("/signup", async (req, res) => {
-    const user = new User({
-        firstName: "Ankita",
-        lastName: "Kumari",
-        emailId: "ankita@gmail.com",
-        password: "ankita333"
-    })
+    //creating a new instance of user model
+    const user = new User(req.body)  //signup API dynamic to receive data from end user(browser/postman hitting the api)
+    console.log(req.body)   //output undefined, add express.json method
 
     try {
         await user.save();
